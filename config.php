@@ -6,9 +6,9 @@
  * Time: 20:02
  */
 $db_address = "127.0.0.1";  //数据库地址
-$db_name = "wenchuan";	//
-$db_user = "root";
-$db_pwd = "root";
+$db_name = "wenchuan";	//数据库名
+$db_user = "root"; //数据库账号
+$db_pwd = "root"; //数据库密码
 
 global $accessKey;
 global $secretKey;
