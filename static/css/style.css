@@ -1,0 +1,253 @@
+*{
+  margin: 0;
+  padding: 0;
+  outline:none;
+}
+body,html{
+height: 100%;
+overflow: hidden;
+font-family: "Microsoft Yahei Light","Microsoft Yahei",Helvetica,sans-serif,"等线";
+}
+a{
+  text-decoration: none;
+  color: #8c8c8c;
+}
+h1{
+  color: #4ecdff;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 120px;
+  font-size: 40px;
+  letter-spacing: 2px;
+}
+#button{
+  width: 250px;
+    height: auto;
+    margin: 40px auto;
+}
+.button{
+    padding: 15px 10px;
+    margin-bottom: 20px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    width: 224px;
+    text-align: center;
+}
+#upload{
+  border: none;
+    color: white;
+    background-color: rgb(65,145,245);
+    -webkit-box-shadow: rgba(65,145,245,0.3) 0px 5px 20px;
+    -moz-box-shadow: rgba(65,145,245,0.3) 0px 5px 20px;
+    box-shadow: rgba(65,145,245,0.3) 0px 5px 20px;
+}
+#download{
+  border: none;
+    color: rgb(65,145,245);
+    background-color: white;
+    -webkit-box-shadow: rgba(65,145,245,0.2) 0px 5px 20px;
+    -moz-box-shadow: rgba(65,145,245,0.2) 0px 5px 20px;
+    box-shadow: rgba(65,145,245,0.2) 0px 5px 20px;
+}
+#reg{
+  position: absolute;
+    right: 10px;
+    top: 6px;
+    font-size: 14px;
+    color: #8c8c8c!important;
+}
+#upload_plane,#download_plane{
+  position: relative;
+  width: 500px;
+  height: 300px;
+  position: absolute;
+  z-index: 99;
+  top: 200px;
+  left: 50%;
+  margin-left: -250px;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  display: none;
+  -webkit-box-shadow: rgba(0,0,0,0.05) 0px 10px 20px;
+    -moz-box-shadow: rgba(0,0,0,0.05) 0px 10px 20px;
+    box-shadow: rgba(0,0,0,0.05) 0px 10px 20px;
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+}
+#fixed{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #444444;
+  opacity: .6;  
+  z-index: 98;
+  top: 0;
+  display: none;
+}
+#upload_title{
+  font-size: 20px;
+  text-align: center;
+  line-height: 32px;
+}
+#upload_button{
+    width: 150px;
+    height: 38px;
+    background-color: rgb(65,145,245);
+    line-height: 38px;
+    text-align: center;
+    color: #fff;
+    margin: 100px auto;
+    border-radius: 4px;
+}
+#file_tb{
+  width: 150px;
+    height: 38px;
+    opacity: 0;
+    margin: -140px auto;
+}
+.ti{
+  font-size: 12px;
+  text-align: center;
+  color: #969696;
+}
+#close,#closes{
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+@font-face {font-family: 'webfont';
+  src: url('//at.alicdn.com/t/webfont_4g9eajr4war.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/webfont_4g9eajr4war.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/webfont_4g9eajr4war.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/webfont_4g9eajr4war.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/webfont_4g9eajr4war.svg#站酷小薇体') format('svg'); /* iOS 4.1- */
+}
+.web-font{
+    font-family:"webfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#name{
+  text-align: center;
+    font-size: 30px;
+    color: #00b7ff;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+#des{
+  font-size: 18px;
+  text-align: center;
+  color: #464646;
+  line-height: 70px;
+}
+#save_state{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  margin-left: -62px;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 600px) {
+    #upload_plane,#download_plane{
+      width: 94%!important;
+    }
+}
+
+#upload_progress{
+  width: 92%;
+  height: 16px;
+  margin: 10px auto;
+  background: #eaeaea;
+  border-radius: 6px;
+  overflow: hidden;
+  display: none;
+}
+#progress{
+  transition: all .3s;
+  width: 0%;
+  height: 16px;
+  background-color: rgb(65,145,245);
+}
+#get_pwd{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: -1;
+  display: none;
+}
+#code{
+  font-size: 35px;
+    font-family: "Microsoft Yahei";
+    font-weight: bold;
+    line-height: 30px;
+    letter-spacing: 10px;
+}
+#btnDone2,#btnDone3{
+  position: relative;
+    padding: 10px 35px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: small;
+    background-color: rgb(65,145,245);
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    left: 50%;
+    margin-left: -47px;
+    margin-top: 15px;
+}
+#btnDone3{
+  margin-left: -61px;
+}
+#inputCode{
+  position: relative;
+    width: 200px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    padding: 15px;
+    padding-left: 25px;
+    margin-bottom: 35px;
+    color: rgb(65,145,245);
+    font-size: 35px;
+    letter-spacing: 4px;
+    text-align: center;
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    transition: all 0.25s;
+    left: 50%;
+    margin-left: -100px;
+}

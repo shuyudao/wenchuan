@@ -1,0 +1,176 @@
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>在线跨设备文件传输</title>
+  <link rel="stylesheet" href="./static/css/style.css"/>
+  <link rel="stylesheet" href="./static/css/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="https://pan.imwj.top/static/alert/css/style.css">
+  <!-- 外部脚本 -->
+  <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> 
+
+</head>
+
+<body>
+
+<h1><img src="./static/img/logo.png" width="140" height="140"/></h1>
+<p id="name"class="web-font"> 文 传 </p>
+<P id="des">简约跨设备文件传输</P>
+  <!-- 操作功能按钮 -->
+  <div id="button">
+    <div id="upload" class="button">传输文件</div>
+    <div id="download" class="button button2">接收文件</div>
+  </div>
+  
+  <!-- 上传面板 -->
+  <div id="upload_plane">
+    <div id="get_pwd">
+      <p style="text-align: center;margin-top: 20px;font-size: 24px;">文件提取码</p>
+      <p style="text-align: center;margin-top: 40px"><b id="code"></b></p>
+      <p style="text-align: center;color: #888;font-size: 14px;margin-top: 30px;">*提取文件后文件将自动删除</p>
+      <button class="btn1" id="btnDone2">关闭</button>
+    </div>
+    <p id="upload_title">发送你的文件</p>
+    <div id="upload_button"><span class="iconfont icon-shangchuan"></span> 上传文件</div>
+    <form id="file_tb">
+        <input type="file" id="file" multiple style="height:36px;width:150px;">
+    </form>
+    <p class="ti" style="margin-top:30px">在其它设备打开接收文件</p>
+    <p class="ti">文件接收成功后，服务器文件将自动删除</p>
+
+    <b id="close"><span style="font-size: 20px;" class="iconfont icon-close_cricle"></span></b>
+    <div id="upload_progress">
+      <div id="progress"></div>
+    </div>
+    <form id="save_state" action="#">
+      <!-- <label><input class="radiobox" checked type="radio" name="save_state" value="0" /> 24小时后自动删除</label><br> -->
+      <label><input class="radiobox" checked type="radio" name="save_state" value="1" /> 接收后自动删除</label>
+    </form>
+  </div>
+  <!-- 文件接收面板 -->
+  <div id="download_plane">
+    <p style="text-align: center;font-size: 22px;color: #000;margin-top: 36px;">
+      提取文件
+    </p>
+    <input type="tel" id="inputCode" maxlength="6" autocomplete="off">
+    <p></p>
+    <button class="btn1" id="btnDone3">提取文件</button>
+    <b id="closes"><span style="font-size: 20px;" class="iconfont icon-close_cricle"></span></b>
+  </div>
+  <!-- 全局蒙版遮罩 -->
+  <div id="fixed"></div>
+</body>
+
+</html>
+<!-- 文件上传相关JavaScript -->
+
+<script src="./static/js/upload/download.js"></script>
+<script type="text/javascript" src="https://pan.imwj.top/static/alert/js/ui.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/plupload/2.1.9/moxie.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/plupload/2.1.9/plupload.full.min.js"></script>
+<script src="https://pan.imwj.top/static/js/qiniu.js"></script>
+<script src="./static/js/upload/upload.js"></script>
+<script>
+
+    //cookie操作
+    function setCookie(name, value, seconds) {
+    seconds = seconds || 0;   //seconds有值就直接赋值，没有为0
+    var expires = "";
+    if (seconds != 0) {      //设置cookie生存时间
+        var date = new Date();
+        date.setTime(date.getTime() + (seconds * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+     document.cookie = name + "=" + escape(value) + expires + "; path=/";   //转码并赋值
+    }
+ 
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            var c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                var c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end)).replace(/\"/g, "");
+            }
+        }
+        return null;
+    }
+    
+    function clearCookie(name) {
+        setCookie(name, "", -1);
+    }
+
+    function chekLogin(){
+      if(getCookie("islogin")==null||getCookie("User")==null){
+        return false;
+      }else{
+        //请求服务器校验信息
+        //校验方式：获取cookie的user信息，将user+密码+盐然后MD5加密返回给客户端判断是否与islogin匹配
+
+      }
+    }
+
+    
+
+    var upload = document.getElementById('upload');
+    var download = document.getElementById('download');
+
+    var close = document.getElementById("close");
+    var closes = document.getElementById("closes");
+    var upload_plane = document.getElementById("upload_plane");
+    var downlaod_plane = document.getElementById("download_plane");
+    var fixed = document.getElementById("fixed");
+
+    function planecss(){
+      upload_plane = document.getElementById("upload_plane");
+      if(document.body.clientWidth < 600){
+        upload_plane.style.marginLeft = parseInt(document.body.clientWidth*0.94)/2*-1+"px";
+        downlaod_plane.style.marginLeft = parseInt(document.body.clientWidth*0.94)/2*-1+"px";
+
+      }
+    }
+
+   
+    closes.onclick = function(){
+      downlaod_plane.style.display = "none";
+      fixed.style.display = 'none'; 
+    }
+
+    document.getElementById('btnDone3').onclick = function(){   //提取文件
+      var code = document.getElementById('inputCode').value;
+      if (code=='') {
+        mizhu.toast('没找到:)', 1500);
+      }else{
+        $.ajax({
+          type : "GET",
+          url : "./function/file/download.php",  //返回信息给后台
+          data : 'pwd='+code,
+          success : function(data) {
+              if (data=='error') {
+                mizhu.toast('没找到:)', 1500);
+              }else{
+                document.getElementById('inputCode').value = '';
+                window.open(data);
+              }
+          }
+        });
+      }
+      
+    }
+
+    upload.onclick = function(){
+      init_uploader()  //启动上传面板  同时开始判断是否开始接收面板，如没有则驳回请求
+      planecss();  //校正样式
+    }
+    download.onclick = function(){
+      planecss()
+      downlaod_plane.style.display = "block";
+      fixed.style.display = 'block';
+    }
+    
+    document.getElementById('btnDone2').onclick = function(){
+      $('#get_pwd').css('z-index','-1');
+      $('#get_pwd').css('display','none');
+    }
+</script>
