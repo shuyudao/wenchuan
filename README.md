@@ -38,4 +38,3 @@
 ## 截图预览
 ![无标题.png](https://i.loli.net/2019/03/04/5c7d0ae9095e8.png)
 
-[在线DEMO](http://google.imwj.top/)
